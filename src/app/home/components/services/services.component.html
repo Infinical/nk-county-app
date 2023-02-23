@@ -1,0 +1,20 @@
+<div class="ion-padding">
+  <h3 class="title">All Services</h3>
+
+  <div class="services">
+    <ion-grid>
+      <!-- Parking & Health -->
+      <ion-row style="margin-bottom: 10vh">
+        <ion-col size="6" *ngFor="let service of services"
+          ><ion-card (click)="navigateToService(service.route)">
+            <ion-card-header>
+              <mat-icon>{{ service.iconName }}</mat-icon>
+              <ion-card-subtitle>{{ service.name }}</ion-card-subtitle>
+              <small>{{ service.description }}</small>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

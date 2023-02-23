@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Offstreet Parking </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="daily_parking">
+  <!-- Form -->
+  <ion-card class="ion-padding">
+    <form action="">
+      <!-- Parking Zone -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Offstreet Zone</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let zone of zones" [value]="zone.value">
+            {{ zone.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Vehicle Type -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Vehicle Type</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let type of vehicleTypes" [value]="type.value">
+            {{ type.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Vehicle Number Plate No.</mat-label>
+        <input matInput placeholder="e.g KCG 846V" />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+      <div class="pay_button">
+        <ion-button expand="block" fill="solid">Check Status</ion-button>
+      </div>
+    </form>
+  </ion-card>
+</div>

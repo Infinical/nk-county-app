@@ -1,0 +1,124 @@
+<ion-content class="ion-padding" *ngIf="!loading">
+  <div class="ion-padding-bottom" style="margin-top: 0.5rem" (click)="back()">
+    <mat-icon matSuffix>arrow_back_ios</mat-icon>
+  </div>
+  <div class="ion-margin-bottom">
+    <h1>Let's sign you up.</h1>
+    <h2>Welcome onboard.</h2>
+    <h2 class="ion-padding-bottom">Payments made easier!</h2>
+  </div>
+
+  <div class="ion-padding-top ion-margin-top">
+    <form
+      action=""
+      [formGroup]="registerForm"
+      (submit)="registerForm.valid && onRegister()"
+    >
+      <!-- First Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="firstName"
+          placeholder="Jane"
+        />
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+      <!-- Last Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Last Name</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="lastName"
+          placeholder="Doe"
+        />
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+      <!-- Email Address -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="janedoe@email.com"
+        />
+        <mat-icon matSuffix>mail_outline</mat-icon>
+      </mat-form-field>
+      <!-- Password -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="*********"
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Confirm Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="*********"
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <div class="bottom">
+        <ion-button
+          type="submit"
+          [disabled]="registerForm.invalid"
+          fill="solid"
+          expand="block"
+        >
+          Sign Up </ion-button
+        ><br />
+        <p class="ion-text-center">
+          <strong>Already have an account? </strong>
+          <a
+            style="text-decoration: none"
+            href=""
+            [routerLink]="['/login']"
+            routerLinkActive="router-link-active"
+            ><strong>Sign In</strong></a
+          >
+        </p>
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

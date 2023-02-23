@@ -1,0 +1,136 @@
+<ion-content>
+  <div class="container">
+    <div class="flex-container">
+      <div>
+        <img
+          style="
+            border-radius: 50%;
+            height: 150px;
+            width: 150px;
+            margin-top: 5vh;
+          "
+          src="data:image/png;base64,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"
+        />
+        <ion-text color="medium" class="ion-text-center">
+          <h2>{{user?.firstName}} {{user?.lastName}}</h2>
+          <div style="display: flex" class="ion-justify-content-center">
+            <ion-icon name="mail-outline" color="medium"> </ion-icon>
+            <p>{{user?.email}}</p>
+          </div>
+        </ion-text>
+      </div>
+      <!-- <div>
+      <ion-button color="light" class="camera-button">
+        <ion-icon slot="icon-only" name="camera-outline" color="medium">
+        </ion-icon>
+      </ion-button>
+    </div> -->
+    </div>
+
+    <ion-card
+      [routerLink]="['/tabs/profile/profile-information']"
+      routerLinkActive="router-link-active"
+    >
+      <ion-card-header class="card-header">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <!-- <img src="../../../assets/icon/daily_parking.png" alt="" /> -->
+              <mat-icon style="transform: scale(2); padding-top: 5px"
+                >person</mat-icon
+              >
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-subtitle>Profile Information</ion-card-subtitle>
+              <p>Your profile details</p>
+            </ion-col>
+            <ion-col class="ion-padding-top">
+              <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card
+      [routerLink]="['/tabs/profile/security']"
+      routerLinkActive="router-link-active"
+    >
+      <ion-card-header class="card-header">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <mat-icon style="transform: scale(2); padding-top: 5px"
+                >key</mat-icon
+              >
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-subtitle>Security</ion-card-subtitle>
+              <p>Change your password</p>
+            </ion-col>
+            <ion-col class="ion-padding-top">
+              <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card
+      [routerLink]="['/tabs/profile/help']"
+      routerLinkActive="router-link-active"
+    >
+      <ion-card-header class="card-header">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <mat-icon style="transform: scale(2); padding-top: 5px"
+                >contact_support</mat-icon
+              >
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-subtitle>Help?</ion-card-subtitle>
+              <p>Reach out to us</p>
+            </ion-col>
+            <ion-col class="ion-padding-top">
+              <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-card
+      [routerLink]="['/tabs/profile/policy']"
+      routerLinkActive="router-link-active"
+    >
+      <ion-card-header class="card-header">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2">
+              <mat-icon style="transform: scale(2); padding-top: 5px"
+                >policy</mat-icon
+              >
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-subtitle>Privacy Policy</ion-card-subtitle>
+              <p>Learn our privacy policies</p>
+            </ion-col>
+            <ion-col class="ion-padding-top">
+              <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+    <div style="margin-bottom: 15vh">
+      <ion-text color="medium" class="ion-text-center">
+        <h2>
+          <a href="" (click)="onLogout()" style="text-decoration: none"
+            >Logout
+          </a>
+        </h2>
+      </ion-text>
+    </div>
+  </div>
+</ion-content>

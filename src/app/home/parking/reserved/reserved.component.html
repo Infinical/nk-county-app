@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Reserved Parking </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="reserved_parking">
+  <!-- Form -->
+
+  <form
+    action=""
+    class="ion-padding"
+    [formGroup]="reservedParkingForm"
+    (submit)="reservedParkingForm.valid && onReservedParkingTypeBooking()"
+  >
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel
+        [expanded]="step === 0"
+        (opened)="setStep(0)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Reservation Type </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Reservation Type -->
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%"
+          floatLabel="always"
+          class="ion-padding-bottom"
+        >
+          <mat-label>Select Reserved Parking Type</mat-label>
+          <mat-select formControlName="reservedParkingType">
+            <mat-option
+              *ngFor="let type of reservedParkingTypes"
+              [value]="type"
+            >
+              {{ type.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Start Date -->
+        <mat-form-field
+          class="ion-padding-bottom"
+          appearance="outline"
+          floatLabel="always"
+          style="width: 100%"
+        >
+          <mat-label>Select Start Date</mat-label>
+          <input
+            matInput
+            formControlName="startDate"
+            [min]="minDate"
+            [matDatepicker]="startdatePicker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="startdatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startdatePicker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- End Date -->
+        <mat-form-field
+          class="ion-padding-bottom"
+          appearance="outline"
+          floatLabel="always"
+          style="width: 100%"
+        >
+          <mat-label>Select End Date</mat-label>
+          <input
+            matInput
+            formControlName="endDate"
+            [min]="minDate"
+            [matDatepicker]="endDatePicker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-action-row>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 1"
+        (opened)="setStep(1)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Location </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!-- Subcounty -->
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%"
+          floatLabel="always"
+          class="ion-padding-bottom"
+        >
+          <mat-label>Select Subcounty</mat-label>
+          <mat-select
+            formControlName="subCounty"
+            (selectionChange)="onSubCountySelected($event)"
+          >
+            <mat-option
+              *ngFor="let subcounty of subCounties"
+              [value]="subcounty"
+            >
+              {{ subcounty.subCountyName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Subcounty -->
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%"
+          floatLabel="always"
+          class="ion-padding-bottom"
+        >
+          <mat-label>Select Ward</mat-label>
+          <mat-select formControlName="ward">
+            <mat-option *ngFor="let ward of wards" [value]="ward">
+              {{ ward.wardName }}
+            </mat-option>
+          </mat-select>
+          <span *ngIf="wardsLoading" matSuffix
+            ><mat-spinner [diameter]="20"></mat-spinner
+          ></span>
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button mat-button color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        [expanded]="step === 2"
+        (opened)="setStep(2)"
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> More Info </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%"
+          floatLabel="always"
+          class="ion-padding-bottom"
+        >
+          <mat-label>Number of Slots to reserve</mat-label>
+          <input matInput type="number" formControlName="slots" />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          style="width: 100%"
+          floatLabel="always"
+          class="ion-padding-bottom"
+        >
+          <mat-label>Registration Plate No</mat-label>
+          <input matInput type="number" formControlName="plateNo" />
+        </mat-form-field>
+
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Previous</button>
+          <button
+            mat-button
+            color="primary"
+            [disabled]="reservedParkingForm.invalid"
+            type="submit"
+          >
+            Continue
+          </button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <!-- <div class="pay_button">
+      <ion-button expand="block" fill="solid">Check Status</ion-button>
+    </div> -->
+  </form>
+</div>

@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="ion-padding">
+    <mat-icon (click)="close()">close</mat-icon>
+  </div>
+
+  <div id="receipt-container">
+    <div class="zigzag">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-img src="assets/images/logo.png"></ion-img>
+          </ion-thumbnail>
+        </ion-item>
+      </ion-list>
+
+      <ion-text class="ion-padding-top">
+        <h1 *ngIf="data?.flow === 'dailyparking'">Daily Parking</h1>
+        <h1 *ngIf="data?.flow === 'seasonalparking'">Seasonal Parking</h1>
+        <h1 *ngIf="data?.flow === 'reservedparking'">Reserved Parking</h1>
+        <h1 *ngIf="data?.flow === 'marketcess'">Market Cess</h1>
+        <h1 *ngIf="data?.flow === 'singlebusinesspermit'">
+          Single Business Permit
+        </h1>
+        <h1 *ngIf="data?.flow === 'foodhandlercert'">
+          Food Handler Certificate
+        </h1>
+      </ion-text>
+
+      <section
+        class="ion-padding"
+        *ngIf="
+          data.flow !== 'singlebusinesspermit' &&
+          data.flow !== 'foodhandlercert'
+        "
+      >
+        <header>
+          <div class="col header-border" style="width: 20%">
+            <strong>Qty</strong>
+          </div>
+          <div class="col header-border">
+            <strong>Description</strong>
+          </div>
+          <div class="col header-border"><strong>Amount</strong></div>
+        </header>
+        <div class="row">
+          <div class="col ion-padding-top text-grey header-border">1</div>
+          <div class="col header-border" *ngIf="data?.flow === 'dailyparking'">
+            <p class="text-grey">Type: {{ data?.vehicleType?.name }}</p>
+            <p class="text-grey">Zone: {{ data?.parkingZone?.zoneName }}</p>
+            <p class="text-grey">Reg/No: {{ data?.licenceRegistrationNo }}</p>
+          </div>
+          <div
+            class="col header-border"
+            *ngIf="data?.flow === 'seasonalparking'"
+          >
+            <p class="text-grey">Type: {{ data?.vehicleType?.name }}</p>
+            <p class="text-grey">Duration: {{ data?.duration?.viewValue }}</p>
+            <p class="text-grey">
+              Start Date: {{ data?.startDate | date: "mediumDate" }}
+            </p>
+            <p class="text-grey">
+              End Date: {{ getEndDate() | date: "mediumDate" }}
+            </p>
+            <p class="text-grey">Reg/No: {{ data?.plateNo }}</p>
+          </div>
+          <div
+            class="col header-border"
+            *ngIf="data?.flow === 'reservedparking'"
+          >
+            <p class="text-grey">Type: {{ data?.reservedParkingType?.name }}</p>
+            <p class="text-grey">
+              Subcounty: {{ data?.subCounty?.subCountyName }}
+            </p>
+            <p class="text-grey">Ward: {{ data?.ward?.wardName }}</p>
+            <p class="text-grey">Reg/No: {{ data?.plateNo }}</p>
+            <p class="text-grey">
+              Start Date: {{ data?.startDate | date: "mediumDate" }}
+            </p>
+            <p class="text-grey">
+              End Date: {{ data?.endDate | date: "mediumDate" }}
+            </p>
+          </div>
+          <div class="col header-border" *ngIf="data?.flow === 'marketcess'">
+            <p class="text-grey">Market: {{ data?.market?.name }}</p>
+            <p class="text-grey">Id Number: {{ data?.idNumber }}</p>
+            <p class="text-grey">Slots: {{ data?.slots }}</p>
+          </div>
+          <div class="col header-border price-container">
+            <p class="price text-grey">Ksh. {{ data?.price }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col ion-padding-top text-grey header-border">
+            <p class="text-grey">Total</p>
+          </div>
+          <div class="col header-border"></div>
+          <div class="col header-border">
+            <p class="text-grey">Ksh. {{ data?.price }}</p>
+          </div>
+        </div>
+      </section>
+
+      <div *ngIf="data.flow === 'singlebusinesspermit'" class="sbp ion-padding">
+        <p>Application Type: {{ data?.applicationType | titlecase }}</p>
+        <p>Business Name: {{ data?.businessName }}</p>
+        <p>Street Name: {{ data?.streetName }}</p>
+        <p>Subcounty: {{ data?.subcounty?.subCountyName }}</p>
+        <p>Ward: {{ data?.ward?.wardName }}</p>
+        <p>Building Name: {{ data?.buildingName }}</p>
+        <p>Floor No: {{ data?.floorNo }}</p>
+        <p>Room No: {{ data?.roomNo }}</p>
+        <p>Category: {{ data?.businessCategory?.name }}</p>
+        <p>Employees: {{ data?.noOfEmployees }}</p>
+        <p>Business Email: {{ data?.businessEmail }}</p>
+        <p>Business Phone No: {{ data?.businessPhoneNumber }}</p>
+        <p>C/P Phone No: {{ data?.contactPersonPhoneNumber }}</p>
+        <p>C/P Email: {{ data?.contactPersonEmail }}</p>
+      </div>
+
+      <div *ngIf="data.flow === 'foodhandlercert'" class="sbp ion-padding">
+        <p>Application Type: {{ data?.applicationType | titlecase }}</p>
+        <p *ngIf="data?.employmentStatus">
+          Employment Status: {{ data?.employmentStatus | titlecase }}
+        </p>
+        <p *ngIf="data?.employerName">
+          Employer Name: {{ data?.employerName | titlecase }}
+        </p>
+        <p *ngIf="data?.employerPhysicalAddress">
+          Employer Address: {{ data?.employerPhysicalAddress | titlecase }}
+        </p>
+        <p>
+          Certificate Type: {{ data?.foodHandlersCertificateType | titlecase }}
+        </p>
+        <p>Subcounty: {{ data?.subcounty?.subCountyName }}</p>
+        <p>Ward: {{ data?.ward?.wardName }}</p>
+        <p>Hospital Category: {{ data?.category | titlecase }}</p>
+        <p>County Hospital: {{ data?.countyHospital?.name }}</p>
+        <p>Street Name: {{ data?.streetName }}</p>
+        <p>Plot No: {{ data?.plotNo }}</p>
+
+        <h2 class="text-center">PRICE: Kes: {{ data?.price }}</h2>
+      </div>
+
+      <div class="pay_button">
+        <ion-button
+          expand="block"
+          type="button"
+          fill="solid"
+          (click)="continue()"
+          >Continue</ion-button
+        >
+      </div>
+    </div>
+  </div>
+</div>

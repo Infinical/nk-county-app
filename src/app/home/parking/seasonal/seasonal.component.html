@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Seasonal Parking </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="seasonal_parking" *ngIf="!loading">
+  <!-- Form -->
+  <ion-card class="ion-padding">
+    <form
+      action=""
+      [formGroup]="seasonalForm"
+      (submit)="seasonalForm.valid && onConfirmPricing()"
+    >
+      <!-- Duration -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Parking Duration</mat-label>
+        <mat-select formControlName="duration">
+          <mat-option *ngFor="let duration of durations" [value]="duration">
+            {{ duration.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Vehicle Type -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Vehicle Type</mat-label>
+        <mat-select formControlName="vehicleType">
+          <mat-option *ngFor="let type of vehicleTypes" [value]="type">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Start Date -->
+      <mat-form-field
+        class="ion-padding-bottom"
+        appearance="outline"
+        floatLabel="always"
+        style="width: 100%"
+      >
+        <mat-label>Select Start Date</mat-label>
+        <input
+          matInput
+          [min]="minDate"
+          formControlName="startDate"
+          [matDatepicker]="startdatePicker"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startdatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startdatePicker></mat-datepicker>
+      </mat-form-field>
+      <!-- Number Plate -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Vehicle Number Plate No.</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="plateNo"
+          placeholder="e.g KCG 877H"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+      <div class="pay_button">
+        <ion-button
+          expand="block"
+          type="submit"
+          fill="solid"
+          [disabled]="seasonalForm.invalid"
+          >Continue</ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</div>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

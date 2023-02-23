@@ -1,0 +1,91 @@
+<ion-content class="ion-padding" *ngIf="!loading">
+  <!-- <div class="ion-padding-bottom" style="margin-top: 5vh" (click)="back()">
+    <mat-icon matSuffix>arrow_back_ios</mat-icon>
+  </div> -->
+  <div class="ion-margin-bottom" style="margin-top: 5vh">
+    <h1>Let's sign you in.</h1>
+    <h2>Welcome back.</h2>
+    <h2 class="ion-padding-bottom">You've been missed!</h2>
+  </div>
+
+  <div class="ion-padding-top ion-margin-top">
+    <form
+      action=""
+      [formGroup]="loginForm"
+      (submit)="loginForm.valid && onLogin()"
+    >
+      <!-- Email Address -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>ID Number</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="username"
+          placeholder="12345678"
+        />
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+      <!-- Password -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="*********"
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <p class="ion-text-start ion-padding-bottom">
+        <strong> </strong>
+        <a
+          style="text-decoration: none; color: black"
+          href=""
+          [routerLink]="['/forgot-password']"
+          routerLinkActive="router-link-active"
+          ><strong>Forgot password?</strong></a
+        >
+      </p>
+
+      <div class="bottom">
+        <ion-button
+          type="submit"
+          [disabled]="loginForm.invalid"
+          fill="solid"
+          expand="block"
+        >
+          Login </ion-button
+        ><br />
+        <p class="ion-text-center">
+          <strong>Don't have an account? </strong>
+          <a
+            style="text-decoration: none"
+            href=""
+            [routerLink]="['/register']"
+            routerLinkActive="router-link-active"
+            ><strong>Sign Up</strong></a
+          >
+        </p>
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

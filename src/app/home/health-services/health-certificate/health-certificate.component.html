@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Health Certificate </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="daily_parking" *ngIf="!loading">
+  <ion-card class="ion-padding-horizontal"
+    ><mat-stepper labelPosition="bottom" #stepper>
+      <mat-step [stepControl]="step1">
+        <form [formGroup]="step1">
+          <!-- <ng-template matStepLabel>Category</ng-template> -->
+          <!-- Application Type -->
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Subcounty</mat-label>
+            <mat-select
+              formControlName="subcounty"
+              placeholder="Select subcounty"
+              (selectionChange)="onSubCountySelected($event)"
+            >
+              <mat-option
+                *ngFor="let subcounty of subcounties"
+                [value]="subcounty"
+              >
+                {{ subcounty.subCountyName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Ward</mat-label>
+            <mat-select formControlName="ward" placeholder="Select ward">
+              <mat-option *ngFor="let ward of wards" [value]="ward">
+                {{ ward.wardName }}
+              </mat-option>
+            </mat-select>
+            <span *ngIf="wardsLoading" matSuffix
+              ><mat-spinner [diameter]="20"></mat-spinner
+            ></span>
+          </mat-form-field>
+
+          <!-- Hospital Category -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Select Single Business Permit</mat-label>
+            <mat-select
+              formControlName="sbp"
+              placeholder="Single Business Permit"
+            >
+              <mat-option *ngFor="let sbp of sbps" [value]="sbp">
+                {{ sbp.businessName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              matStepperNext
+              [disabled]="step1.invalid"
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step 2 -->
+      <mat-step [stepControl]="step2">
+        <!-- <form [formGroup]="step2">
+          
+
+          <div class="ion-padding-top">
+            <button
+              class="prev-button"
+              color="primary"
+              mat-stroked-button
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              [disabled]="step2.invalid"
+              (click)="submit()"
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form> -->
+      </mat-step>
+
+      <!-- <mat-step>
+        <ng-template matStepLabel>Review</ng-template>
+      </mat-step> -->
+    </mat-stepper>
+  </ion-card>
+</div>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

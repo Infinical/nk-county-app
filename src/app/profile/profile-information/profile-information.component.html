@@ -1,0 +1,150 @@
+<ion-content class="ion-padding" *ngIf="!loading">
+  <div class="ion-padding-bottom" style="margin-top: 5vh" (click)="back()">
+    <mat-icon matSuffix>arrow_back_ios</mat-icon>
+  </div>
+  <div class="ion-margin-bottom">
+    <h1>Update your profile.</h1>
+  </div>
+
+  <div class="ion-padding-top ion-margin-top" style="margin-bottom: 15vh">
+    <form
+      action=""
+      [formGroup]="profileInforForm"
+      (submit)="profileInforForm.valid && onUpdateProfile()"
+    >
+      <!-- First Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>First Name</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="firstName"
+          placeholder=""
+        />
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" formControlName="lastName" placeholder="" />
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
+      <!-- ID Number -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>ID Number</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="idNumber"
+          placeholder="12345678"
+        />
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+      <!-- Last Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>KRA Pin</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="kraPin"
+          placeholder="A************K"
+        />
+        <mat-icon matSuffix>description</mat-icon>
+      </mat-form-field>
+      <!-- Primary Email -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Primary Email Address</mat-label>
+        <input matInput type="text" formControlName="email" placeholder="" />
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Secondary Email Address</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="secondaryEmail"
+          placeholder=""
+        />
+        <mat-icon matSuffix>alternate_email</mat-icon>
+      </mat-form-field>
+      <!-- Primary Phone Number -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="phoneNumber"
+          placeholder="janedoe@email.com"
+        />
+        <mat-icon matSuffix>smartphone</mat-icon>
+      </mat-form-field>
+
+      <!-- Primary Phone Number -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Secondary Phone Number</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="secondaryPhoneNumber"
+          placeholder=""
+        />
+        <mat-icon matSuffix>smartphone</mat-icon>
+      </mat-form-field>
+
+      <div class="bottom">
+        <ion-button
+          type="submit"
+          [disabled]="profileInforForm.invalid"
+          fill="solid"
+          expand="block"
+        >
+          Submit </ion-button
+        ><br />
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

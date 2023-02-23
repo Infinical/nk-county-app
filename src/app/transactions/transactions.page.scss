@@ -1,0 +1,28 @@
+.container {
+    height: calc(100% - 70px);
+    background-color: #fafafa;
+    position: relative;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header {
+    padding-bottom: 0.3rem;
+}
+.outstanding {
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    border: 1px solid grey;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    padding-top: 2vh;
+    border-radius: 1rem;
+}
+
+.title {
+    margin: 1rem;
+}

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Business Licensing </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="business-licensing">
+  <ion-card
+    *ngFor="let service of services"
+    [routerLink]="[service.route]"
+    routerLinkActive="router-link-active"
+  >
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <mat-icon color="primary">{{ service?.iconName }}</mat-icon>
+          </ion-col>
+          <ion-col size="8">
+            <ion-card-subtitle>{{ service?.name }}</ion-card-subtitle>
+            <small>{{ service?.description }}</small>
+          </ion-col>
+          <ion-col class="ion-padding-top">
+            <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+</div>

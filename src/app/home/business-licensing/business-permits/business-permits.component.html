@@ -1,0 +1,424 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Single Business Permit </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="daily_parking" *ngIf="!loading">
+  <ion-card class="ion-padding-horizontal"
+    ><mat-stepper labelPosition="bottom" #stepper>
+      <mat-step [stepControl]="businessCategoryForm">
+        <form [formGroup]="businessCategoryForm">
+          <ng-template matStepLabel>Category</ng-template>
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Application Type</mat-label>
+            <mat-select formControlName="applicationType">
+              <mat-option value="new"> New </mat-option>
+              <mat-option value="renewal"> Renewal </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              matStepperNext
+              [disabled]="businessCategoryForm.invalid"
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Business Details -->
+      <mat-step [stepControl]="businessDetailsForm">
+        <form [formGroup]="businessDetailsForm">
+          <ng-template matStepLabel>Details</ng-template>
+
+          <!-- Business Category Form -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Business Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter business name"
+              type="text"
+              formControlName="businessName"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Street/Estate Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter street or estate name"
+              type="text"
+              formControlName="streetName"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Subcounty</mat-label>
+            <mat-select
+              formControlName="subcounty"
+              (selectionChange)="onSubCountySelected($event)"
+            >
+              <mat-option
+                *ngFor="let subcounty of subcounties"
+                [value]="subcounty"
+              >
+                {{ subcounty.subCountyName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Ward</mat-label>
+            <mat-select formControlName="ward">
+              <mat-option *ngFor="let ward of wards" [value]="ward">
+                {{ ward.wardName }}
+              </mat-option>
+            </mat-select>
+            <span *ngIf="wardsLoading" matSuffix
+              ><mat-spinner [diameter]="20"></mat-spinner
+            ></span>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Building Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter building name"
+              type="text"
+              formControlName="buildingName"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Floor Number</mat-label>
+            <input
+              matInput
+              placeholder="Enter floor number"
+              type="text"
+              formControlName="floorNo"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Room/Stall Number</mat-label>
+            <input
+              matInput
+              placeholder="Enter room or stall number"
+              type="text"
+              formControlName="roomNo"
+            />
+          </mat-form-field>
+
+          <div class="ion-padding-top">
+            <button
+              class="prev-button"
+              color="primary"
+              mat-stroked-button
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              [disabled]="businessDetailsForm.invalid"
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Business Activity -->
+      <mat-step [stepControl]="businessActivityForm">
+        <ng-template matStepLabel>Activity</ng-template>
+        <form action="" [formGroup]="businessActivityForm">
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Business Category</mat-label>
+            <mat-select formControlName="businessCategory">
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category"
+              >
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Business Description</mat-label>
+            <textarea
+              matInput
+              placeholder="Enter business description"
+              type="text"
+              formControlName="businessDescription"
+            ></textarea>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Number of Employees</mat-label>
+            <mat-select formControlName="noOfEmployees">
+              <mat-option value="1-9"> 1-9 </mat-option>
+              <mat-option value=" 10-49"> 10-49 </mat-option>
+              <mat-option value="50-100"> 50-100</mat-option>
+              <mat-option value="100+"> Above 100 </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Additional Activity (If any)</mat-label>
+            <input
+              matInput
+              placeholder="Enter additional activity if any"
+              type="text"
+              formControlName="additionalActivity"
+            />
+          </mat-form-field>
+        </form>
+
+        <div class="ion-padding-top">
+          <button
+            class="prev-button"
+            color="primary"
+            mat-stroked-button
+            matStepperPrevious
+          >
+            Back
+          </button>
+          <button
+            class="next-button"
+            color="primary"
+            mat-stroked-button
+            [disabled]="businessActivityForm.invalid"
+            matStepperNext
+          >
+            Next
+          </button>
+        </div>
+      </mat-step>
+      <!-- Contacts -->
+      <mat-step [stepControl]="businessContactsForm">
+        <ng-template matStepLabel>Contacts</ng-template>
+        <form action="" [formGroup]="businessContactsForm">
+          <p style="font-weight: bold">Business Contacts</p>
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder="Enter email address"
+              type="text"
+              formControlName="businessEmail"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Business Phone Number</mat-label>
+            <input
+              matInput
+              placeholder="Enter company phone number"
+              type="text"
+              formControlName="businessPhoneNumber"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Postal Address</mat-label>
+            <input
+              matInput
+              placeholder="Enter business postal address"
+              type="text"
+              formControlName="businessPostalAddress"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Postal Code</mat-label>
+            <input
+              matInput
+              placeholder="Enter business postal code"
+              type="text"
+              formControlName="businessPostalCode"
+            />
+          </mat-form-field>
+
+          <p style="font-weight: bold">Contact Person</p>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>National ID</mat-label>
+            <input
+              matInput
+              placeholder="Enter national ID"
+              type="text"
+              formControlName="contactPersonId"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Roles In Business</mat-label>
+            <input
+              matInput
+              placeholder="Enter role in business"
+              type="text"
+              formControlName="contactPersonRole"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter contact person name"
+              type="text"
+              formControlName="contactPersonName"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Contact Person Email</mat-label>
+            <input
+              matInput
+              placeholder="Enter email address"
+              type="email"
+              formControlName="contactPersonEmail"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Contact Person Phone Number</mat-label>
+            <input
+              matInput
+              placeholder="Enter phone number"
+              type="text"
+              formControlName="contactPersonPhoneNumber"
+            />
+          </mat-form-field>
+
+          <div class="ion-padding-top">
+            <button
+              class="prev-button"
+              color="primary"
+              mat-stroked-button
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              [disabled]="businessContactsForm.invalid"
+              (click)="submit()"
+            >
+              Confirm
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- <mat-step>
+        <ng-template matStepLabel>Review</ng-template>
+      </mat-step> -->
+    </mat-stepper>
+  </ion-card>
+</div>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

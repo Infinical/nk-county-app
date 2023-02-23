@@ -1,0 +1,15 @@
+.container {
+    background-color: #fafafa;
+    min-height: 100vh;
+    overflow-y: auto;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header {
+    padding-bottom: 0.3rem;
+}

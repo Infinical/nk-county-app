@@ -1,0 +1,7 @@
+{
+  "name": "Revenue_Management_App",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

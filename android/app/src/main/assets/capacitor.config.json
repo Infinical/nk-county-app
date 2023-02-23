@@ -1,0 +1,11 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Revenue_Management_App",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"plugins": {
+		"Keyboard": {
+			"resize": "ionic"
+		}
+	}
+}

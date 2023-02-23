@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Market Cess </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="daily_parking" *ngIf="!loading">
+  <!-- Form -->
+  <ion-card class="ion-padding">
+    <form
+      action=""
+      [formGroup]="marketCessForm"
+      (submit)="marketCessForm.valid && confirmDetails()"
+    >
+      <!-- Parking Zone -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Market</mat-label>
+        <mat-select formControlName="market">
+          <mat-option *ngFor="let market of markets" [value]="market">
+            {{ market.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Number of Slots-->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Number of Slots</mat-label>
+        <input
+          matInput
+          placeholder="Number of slots"
+          type="text"
+          formControlName="slots"
+        />
+        <mat-icon matSuffix>tag</mat-icon>
+      </mat-form-field>
+
+      <!-- ID Number -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>ID Number</mat-label>
+        <input
+          matInput
+          placeholder="ID Number"
+          type="text"
+          formControlName="idNumber"
+        />
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+
+      <div class="pay_button">
+        <ion-button
+          expand="block"
+          type="submit"
+          fill="solid"
+          [disabled]="marketCessForm.invalid"
+          >Continue</ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</div>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

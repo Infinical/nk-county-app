@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="top">
+    <div class="bg_image ion-padding">
+      <section>
+        <div class="wave water"></div>
+        <div class="wave water"></div>
+        <div class="wave water"></div>
+        <div class="wave water"></div>
+        <img src="../../../assets/images/fl.png" style="height: 30vh" />
+      </section>
+    </div>
+    <div class="heading ion-padding" style="text-align: center">
+      <h2>Nakuru County</h2>
+      <p class="ion-text-center ion-padding">
+        Manage all your county forms of payment on the go. Its quicker, easier
+        and more secured.
+      </p>
+    </div>
+  </div>
+  <div class="bottom">
+    <ion-grid
+      class="ion-margin"
+      style="position: absolute; bottom: 10px; width: 90%"
+    >
+      <ion-row
+        style="
+          border-right: 2px solid white;
+          border-radius: 3rem;
+          background-color: white;
+        "
+      >
+        <ion-col
+          (click)="selectAction('register')"
+          style="
+            border-right: 2px solid black;
+            border-radius: 3rem;
+            background-color: black;
+          "
+        >
+          <h3
+            class="ion-no-padding-top"
+            style="color: white; text-align: center; margin: 8px"
+          >
+            <strong>Register</strong>
+          </h3>
+        </ion-col>
+        <ion-col
+          (click)="selectAction('login')"
+          style="
+            border-right: 2px solid white;
+            border-top-right-radius: 3rem;
+            border-bottom-right-radius: 3rem;
+            background-color: white;
+          "
+        >
+          <h3
+            class="ion-no-padding-top ion-no-margin-bottom"
+            style="color: black; text-align: center; margin: 8px"
+          >
+            <strong>Login</strong>
+          </h3>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-padding-top">
+        <ion-col>
+          <ion-button
+            expand="block"
+            type="button"
+            fill="outline"
+            (click)="selectAction('explore')"
+            >Skip</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

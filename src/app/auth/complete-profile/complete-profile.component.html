@@ -1,0 +1,98 @@
+<ion-content class="ion-padding" *ngIf="!loading">
+  <div class="ion-padding-bottom" style="margin-top: 0.5rem" (click)="back()">
+    <mat-icon matSuffix>arrow_back_ios</mat-icon>
+  </div>
+  <div class="ion-margin-bottom">
+    <h1>Complete your profile.</h1>
+    <h2>Just one last step.</h2>
+    <h2 class="ion-padding-bottom">Payments made easier!</h2>
+  </div>
+
+  <div class="ion-padding-top ion-margin-top">
+    <form
+      action=""
+      [formGroup]="completeProfileForm"
+      (submit)="completeProfileForm.valid && onProfileComplete()"
+    >
+      <!-- ID Type -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Citizenship</mat-label>
+        <mat-select formControlName="idType" name="food">
+          <mat-option value="Citizen"> Citizen </mat-option>
+          <mat-option value="Alien"> Alien </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- ID Number -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>ID Number</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="idNumber"
+          placeholder="12345678"
+        />
+        <mat-icon matSuffix>badge</mat-icon>
+      </mat-form-field>
+      <!-- Last Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>KRA Pin</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="kraPin"
+          placeholder="A************K"
+        />
+        <mat-icon matSuffix>description</mat-icon>
+      </mat-form-field>
+      <!-- Email Address -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Phone Number</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="phoneNumber"
+          placeholder="0712345678"
+          minlength="10"
+          maxlength="10"
+        />
+        <mat-icon matSuffix>smartphone</mat-icon>
+      </mat-form-field>
+
+      <div class="bottom">
+        <ion-button
+          type="submit"
+          [disabled]="completeProfileForm.invalid"
+          fill="solid"
+          expand="block"
+        >
+          Submit </ion-button
+        ><br />
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

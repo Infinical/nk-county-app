@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Parking Management </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="parking">
+  <!-- Daily Parking -->
+  <ion-card
+    [routerLink]="['/tabs/home/parking/daily']"
+    routerLinkActive="router-link-active"
+  >
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <img src="../../../assets/icon/daily_parking.png" alt="" />
+          </ion-col>
+          <ion-col size="8">
+            <ion-card-subtitle>Daily Parking</ion-card-subtitle>
+            <small>24hr Parking Service</small>
+          </ion-col>
+          <ion-col class="ion-padding-top">
+            <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+  <!-- Seasonal Parking -->
+  <ion-card (click)="navigateTo('seasonal')">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <!-- <ion-icon name="calendar" size="large"></ion-icon> -->
+            <img src="../../../assets/icon/seasonal_parking.png" alt="" />
+          </ion-col>
+          <ion-col size="8">
+            <ion-card-subtitle>Seasonal Parking</ion-card-subtitle>
+            <small>Scheduled Parking Service</small>
+          </ion-col>
+          <ion-col class="ion-padding-top">
+            <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+  <!-- Reserved -->
+  <ion-card (click)="navigateTo('reserved')">
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <!-- <ion-icon name="checkbox" size="large"></ion-icon> -->
+            <img src="../../../assets/icon/reserved_parking.png" alt="" />
+          </ion-col>
+          <ion-col size="8">
+            <ion-card-subtitle>Reserved Parking</ion-card-subtitle>
+            <small>Book Dedicated Parking Service</small>
+          </ion-col>
+          <ion-col class="ion-padding-top">
+            <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+  <!-- Offstreet -->
+  <!-- <ion-card
+    [routerLink]="['/tabs/home/parking/offstreet']"
+    routerLinkActive="router-link-active"
+  >
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="2">
+            <img src="../../../assets/icon/offstreet_parking.png" alt="" />
+          </ion-col>
+          <ion-col size="8">
+            <ion-card-subtitle>Offstreet Parking</ion-card-subtitle>
+            <small>24hr Parking Service</small>
+          </ion-col>
+          <ion-col class="ion-padding-top">
+            <ion-icon name="chevron-forward-outline" size="large"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card> -->
+</div>

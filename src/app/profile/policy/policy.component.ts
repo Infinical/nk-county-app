@@ -1,0 +1,17 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-policy',
+  templateUrl: './policy.component.html',
+  styleUrls: ['./policy.component.scss'],
+})
+export class PolicyComponent implements OnInit {
+  constructor(private router: Router) {}
+
+  ngOnInit() {}
+
+  back() {
+    this.router.navigate(['/tabs/profile'], { replaceUrl: true });
+  }
+}

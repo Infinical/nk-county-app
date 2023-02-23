@@ -1,0 +1,168 @@
+<ion-content class="ion-padding" *ngIf="!loading">
+  <div class="ion-padding">
+    <mat-icon (click)="close()">close</mat-icon>
+  </div>
+
+  <div class="ion-margin-bottom">
+    <h1 style="margin-bottom: 6px">Payment Options</h1>
+    <ion-text color="medium">
+      <h3>Select your preferred payment option!</h3>
+    </ion-text>
+  </div>
+  <form action="">
+    <mat-accordion multi>
+      <!-- Mpesa -->
+      <div class="ion-margin-bottom">
+        <mat-expansion-panel
+          class="ion-margin-bottom"
+          [expanded]="panelOpenState.mpesa === true"
+          (opened)="(panelOpenState.mpesa === true)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>
+                <mat-radio-button value="mpesa" color="primary"
+                  >Mpesa</mat-radio-button
+                >
+              </h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <h3>STK Push</h3>
+            <p>
+              Enter your preferred Safaricom mobile phone number below and we
+              will invoke payment to the provided number
+            </p>
+
+            <div class="ion-padding-top ion-margin-top">
+              <form
+                action=""
+                [formGroup]="phoneNoForm"
+                (submit)="phoneNoForm.valid && submit()"
+              >
+                <mat-form-field
+                  appearance="outline"
+                  style="width: 100%"
+                  floatLabel="always"
+                  class="ion-padding-bottom"
+                >
+                  <mat-label>Phone Number</mat-label>
+                  <input
+                    matInput
+                    type="email"
+                    formControlName="phoneNumber"
+                    minlength="10"
+                    maxlength="10"
+                    placeholder="0700123456"
+                  />
+                  <mat-icon matSuffix>badge</mat-icon>
+                </mat-form-field>
+
+                <div class="bottom">
+                  <ion-button
+                    type="submit"
+                    [disabled]="phoneNoForm.invalid"
+                    fill="solid"
+                    expand="block"
+                  >
+                    Pay </ion-button
+                  ><br />
+                </div>
+              </form>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <!-- Cards -->
+      <div class="ion-margin-bottom">
+        <mat-expansion-panel
+          class="mb-2"
+          [expanded]="panelOpenState.cards === true"
+          (opened)="(panelOpenState.cards === true)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>
+                <mat-radio-button color="primary"
+                  >Debit/Credit/Prepaid Card</mat-radio-button
+                >
+              </h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <p>Coming Soon</p>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <!-- Airtel -->
+      <div class="ion-margin-bottom">
+        <mat-expansion-panel
+          class="mb-2"
+          [expanded]="panelOpenState.airtel === true"
+          (opened)="(panelOpenState.airtel === true)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>
+                <mat-radio-button color="primary"
+                  >Airtel Money</mat-radio-button
+                >
+              </h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <p>Coming Soon</p>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <!-- Pesalink -->
+      <div class="ion-margin-bottom">
+        <mat-expansion-panel
+          class="mb-2"
+          [expanded]="panelOpenState.pesalink === true"
+          (opened)="(panelOpenState.pesalink === true)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>
+                <mat-radio-button color="primary">Pesalink</mat-radio-button>
+              </h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <p>Coming Soon</p>
+          </div>
+        </mat-expansion-panel>
+      </div>
+      <!-- Cash -->
+      <div class="ion-margin-bottom">
+        <mat-expansion-panel
+          class="mb-2"
+          [expanded]="panelOpenState.cash === true"
+          (opened)="(panelOpenState.cash === true)"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h2>
+                <mat-radio-button color="primary"
+                  >Bank Payments(Cash)</mat-radio-button
+                >
+              </h2>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <p>Coming Soon</p>
+          </div>
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </form>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

@@ -1,0 +1,262 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Food Handlers Certificate </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="daily_parking" *ngIf="!loading">
+  <ion-card class="ion-padding-horizontal"
+    ><mat-stepper labelPosition="bottom" #stepper>
+      <mat-step [stepControl]="step1">
+        <form [formGroup]="step1">
+          <!-- <ng-template matStepLabel>Category</ng-template> -->
+          <!-- Application Type -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Application Type</mat-label>
+            <mat-select [disabled]="true" formControlName="applicationType">
+              <mat-option value="individual"> Individual </mat-option>
+              <mat-option value="corporate"> Corporate </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Employment Status -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Employment Status</mat-label>
+            <mat-select
+              formControlName="employmentStatus"
+              placeholder="Employment status"
+            >
+              <mat-option value="employed"> Employed </mat-option>
+              <mat-option value="self-employed"> Self Employed </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Employer Name -->
+          <mat-form-field
+            *ngIf="step1Form.employmentStatus.value === 'employed'"
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Employer Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter employer name"
+              type="text"
+              formControlName="employerName"
+            />
+          </mat-form-field>
+          <!-- Employer Physical Address -->
+          <mat-form-field
+            *ngIf="step1Form.employmentStatus.value === 'employed'"
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Employer Physical Address</mat-label>
+            <input
+              matInput
+              placeholder="Enter employer physical address"
+              type="text"
+              formControlName="employerPhysicalAddress"
+            />
+          </mat-form-field>
+          <!-- Food Handler Cert Type -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Food Handlers Certificate Type</mat-label>
+            <mat-select
+              formControlName="foodHandlersCertificateType"
+              placeholder="Food handlers certificate type"
+            >
+              <mat-option value="new"> New </mat-option>
+              <mat-option value="renewal"> Renewal </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- Previous Application -->
+          <mat-form-field
+            appearance="outline"
+            *ngIf="step1Form.foodHandlersCertificateType.value === 'renewal'"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Previous Application</mat-label>
+            <mat-select
+              formControlName="employmentStatus"
+              placeholder="Food handlers certificate type"
+            >
+              <mat-option value="new"> New </mat-option>
+              <mat-option value="renewal"> Renewal </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              matStepperNext
+              [disabled]="step1.invalid"
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <!-- Step 2 -->
+      <mat-step [stepControl]="step2">
+        <form [formGroup]="step2">
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Subcounty</mat-label>
+            <mat-select
+              formControlName="subcounty"
+              placeholder="Select subcounty"
+              (selectionChange)="onSubCountySelected($event)"
+            >
+              <mat-option
+                *ngFor="let subcounty of subcounties"
+                [value]="subcounty"
+              >
+                {{ subcounty.subCountyName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Ward</mat-label>
+            <mat-select formControlName="ward" placeholder="Select ward">
+              <mat-option *ngFor="let ward of wards" [value]="ward">
+                {{ ward.wardName }}
+              </mat-option>
+            </mat-select>
+            <span *ngIf="wardsLoading" matSuffix
+              ><mat-spinner [diameter]="20"></mat-spinner
+            ></span>
+          </mat-form-field>
+
+          <!-- Hospital Category -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+            class="ion-padding-bottom"
+          >
+            <mat-label>Hospital Category</mat-label>
+            <mat-select
+              formControlName="category"
+              placeholder="County hospital category"
+              (selectionChange)="onHospitalCategorySelected($event)"
+            >
+              <mat-option value="public"> Public </mat-option>
+              <mat-option value="private"> Private </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Select county hospital -->
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Select County Hospital</mat-label>
+            <mat-select
+              formControlName="countyHospital"
+              placeholder="Select county hospital"
+            >
+              <mat-option *ngFor="let hosp of countyHospitals" [value]="hosp">
+                {{ hosp.name }}
+              </mat-option>
+            </mat-select>
+            <span *ngIf="hospLoading" matSuffix
+              ><mat-spinner [diameter]="20"></mat-spinner
+            ></span>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Street Name</mat-label>
+            <input
+              matInput
+              placeholder="Enter floor number"
+              type="text"
+              formControlName="streetName"
+            />
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            style="width: 100%"
+            floatLabel="always"
+          >
+            <mat-label>Plot Number</mat-label>
+            <input
+              matInput
+              placeholder="Enter room or stall number"
+              type="text"
+              formControlName="plotNo"
+            />
+          </mat-form-field>
+
+          <div class="ion-padding-top">
+            <button
+              class="prev-button"
+              color="primary"
+              mat-stroked-button
+              matStepperPrevious
+            >
+              Back
+            </button>
+            <button
+              class="next-button"
+              color="primary"
+              mat-stroked-button
+              [disabled]="step2.invalid"
+              (click)="submit()"
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- <mat-step>
+        <ng-template matStepLabel>Review</ng-template>
+      </mat-step> -->
+    </mat-stepper>
+  </ion-card>
+</div>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

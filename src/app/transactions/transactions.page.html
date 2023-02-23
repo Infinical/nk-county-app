@@ -1,0 +1,192 @@
+<ion-content>
+  <div class="container">
+    <div class="flex-container">
+      <div class="outstanding">
+        <ion-text color="medium" class="ion-text-center">
+          <h1>Outstanding Bill</h1>
+          <div style="display: flex" class="ion-justify-content-center">
+            <h4>Ksh: {{outstandingBill}}</h4>
+          </div>
+        </ion-text>
+      </div>
+      <!-- <div>
+      <ion-button color="light" class="camera-button">
+        <ion-icon slot="icon-only" name="camera-outline" color="medium">
+        </ion-icon>
+      </ion-button>
+    </div> -->
+    </div>
+
+    <div class="transactions" style="margin-bottom: 15vh">
+      <mat-tab-group mat-stretch-tabs>
+        <!-- Unpaid Bills -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>pending_actions</mat-icon>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <div class="title">
+              <h3>Unpaid Bills</h3>
+            </div>
+
+            <div *ngIf="myBills.length > 0; else nobills">
+              <ion-card
+                *ngFor="let bill of myBills; let isLast = last"
+                [ngStyle]="{'margin-bottom': isLast ? '10vh' : ''}"
+              >
+                <ion-card-header class="card-header">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="9">
+                        <ion-card-subtitle
+                          >Invoice No: {{bill?.referenceNo}}</ion-card-subtitle
+                        >
+                        <p style="margin-bottom: 6px">
+                          Due Date: {{bill?.dueDate | date: 'mediumDate'}}
+                        </p>
+                        <p>Service: {{bill?.service | titlecase}}</p>
+                      </ion-col>
+                      <ion-col class="ion-padding-top">
+                        <span
+                          style="color: red"
+                          *ngIf="bill.status === 'pending'"
+                          >Ksh.{{bill?.amount}}</span
+                        >
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+              </ion-card>
+            </div>
+
+            <ng-template #nobills>
+              <ion-text class="ion-text-center">
+                <h3 style="padding-top: 15vh !important">No Pending Bills</h3>
+              </ion-text>
+            </ng-template>
+          </ng-template>
+        </mat-tab>
+        <!-- Transaction History -->
+        <mat-tab label="Transactions">
+          <ng-template mat-tab-label>
+            <mat-icon>price_check</mat-icon>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <div class="title">
+              <h3>Transaction History</h3>
+            </div>
+
+            <div *ngIf="myTransactions.length > 0; else noTransaction">
+              <ion-card *ngFor="let transaction of myTransactions">
+                <ion-card-header class="card-header">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="9">
+                        <ion-card-subtitle
+                          >T/Code:
+                          {{transaction?.transactionCode}}</ion-card-subtitle
+                        >
+                        <p style="margin-bottom: 6px">
+                          Date: {{transaction?.createdAt | date: 'mediumDate'}}
+                        </p>
+                        <p>
+                          Service: {{transaction?.formatted_type | titlecase}}
+                        </p>
+                      </ion-col>
+                      <ion-col class="ion-padding-top">
+                        <span style="color: green"
+                          >Ksh.{{transaction?.amount}}</span
+                        >
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+              </ion-card>
+            </div>
+
+            <ng-template #noTransaction>
+              <ion-text class="ion-text-center">
+                <h3 style="padding-top: 15vh !important">No Transactions</h3>
+              </ion-text>
+            </ng-template>
+          </ng-template>
+        </mat-tab>
+        <!-- Service Applications -->
+        <mat-tab label="Service Applications">
+          <ng-template mat-tab-label>
+            <mat-icon>topic</mat-icon>
+          </ng-template>
+
+          <ng-template matTabContent>
+            <div *ngIf="sbps.length > 0; else noServiceApplications">
+              <div class="title">
+                <h3>Business Permits</h3>
+              </div>
+              <ion-card *ngFor="let sbp of sbps">
+                <ion-card-header class="ion-no-padding">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="">
+                        <p style="margin-bottom: 6px">
+                          <strong>Name:</strong> {{sbp?.businessName}}
+                        </p>
+                        <p style="margin-bottom: 6px">
+                          <strong>Business No:</strong> {{sbp?.sbpNo}}
+                        </p>
+                        <p style="margin-bottom: 6px">
+                          <strong>Invoice No:</strong> {{sbp?.referenceNo}}
+                        </p>
+                        <p style="margin-bottom: 6px">
+                          <strong>From: </strong>{{sbp?.startDate | date:
+                          'mediumDate'}}
+                        </p>
+                        <p style="margin-bottom: 6px">
+                          <strong>To: </strong>{{sbp?.endDate | date:
+                          'mediumDate'}}
+                        </p>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="">
+                        <p
+                          style="color: red"
+                          *ngIf="sbp.licenseStatus === 'awaiting approval'"
+                        >
+                          {{sbp?.licenseStatus | titlecase}}
+                        </p>
+                        <p
+                          style="color: seagreen"
+                          *ngIf="sbp.licenseStatus === 'approved'"
+                        >
+                          {{sbp?.licenseStatus | titlecase}}
+                        </p>
+                      </ion-col>
+                      <ion-col>
+                        <ion-button
+                          *ngIf="sbp.licenseStatus === 'approved'"
+                          size="small"
+                          fill="outline"
+                          >Download</ion-button
+                        ></ion-col
+                      >
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+              </ion-card>
+            </div>
+
+            <ng-template #noServiceApplications>
+              <ion-text class="ion-text-center">
+                <h3 style="padding-top: 5vh !important">
+                  No Service Applications
+                </h3>
+              </ion-text>
+            </ng-template>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</ion-content>

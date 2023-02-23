@@ -1,0 +1,116 @@
+.container {
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: whitesmoke;
+}
+
+.top {
+  // position: absolute;
+  // height: 20vh;
+}
+
+.bg_image {
+  margin-top: 1rem;
+}
+
+.bottom {
+  position: absolute;
+  top: 80vh;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+h2 {
+  font-size: xx-large;
+  font-weight: bolder;
+  font-family: roboto_bold;
+}
+
+p {
+  font-family: roboto_medium;
+  font-size: 1rem;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  border-radius: 30px;
+  overflow: hidden;
+  background-size: 500% 400%;
+  animation: gradient-bg 15s ease infinite;
+  background-image: linear-gradient(315deg, #fefefe 0%, #00a4e4 74%);
+}
+section .wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url("../../../assets/images/wave.png");
+  background-size: 1000px 100px;
+}
+
+@keyframes gradient-bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+section .wave.water {
+  animation: animate 25s linear infinite;
+  z-index: 1000;
+  opacity: 1;
+  animation-delay: 0s;
+  bottom: 0;
+}
+
+section .wave.water:nth-child(2) {
+  animation: animate2 15s linear infinite;
+  z-index: 999;
+  opacity: 0.5;
+  animation-delay: -5s;
+  bottom: 10px;
+}
+section .wave.water:nth-child(3) {
+  animation: animate 30s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  z-index: 998;
+  opacity: 0.2;
+  animation-delay: -5s;
+  bottom: 15px;
+}
+section .wave.water:nth-child(4) {
+  animation: animate2 5s linear infinite;
+  z-index: 997;
+  opacity: 0.7;
+  animation-delay: -5s;
+  bottom: 20px;
+}
+
+@keyframes animate {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+@keyframes animate2 {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -1000px;
+  }
+}

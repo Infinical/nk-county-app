@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons class="ion-padding-left" slot="start">
+      <ion-back-button text="" icon="chevron-back-outline"> </ion-back-button>
+    </ion-buttons>
+    <ion-title> Daily Parking </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="daily_parking" *ngIf="!loading">
+  <!-- Form -->
+  <ion-card class="ion-padding">
+    <form
+      action=""
+      [formGroup]="dailyForm"
+      (submit)="dailyForm.valid && onConfirmPrice()"
+    >
+      <!-- Parking Zone -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Parking Zone</mat-label>
+        <mat-select formControlName="parkingZone">
+          <mat-option *ngFor="let zone of zones" [value]="zone">
+            {{ zone.zoneName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Vehicle Type -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Select Vehicle Type</mat-label>
+        <mat-select formControlName="vehicleType">
+          <mat-option *ngFor="let type of vehicleTypes" [value]="type">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Licence Plate No -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+        class="ion-padding-bottom"
+      >
+        <mat-label>Vehicle Number Plate No.</mat-label>
+        <input
+          matInput
+          placeholder="e.g KCG 846V"
+          type="text"
+          formControlName="licenceRegistrationNo"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+      <div class="pay_button">
+        <ion-button
+          expand="block"
+          [disabled]="dailyForm.invalid"
+          type="submit"
+          fill="solid"
+          >Continue</ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</div>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>

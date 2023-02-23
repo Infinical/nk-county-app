@@ -1,0 +1,34 @@
+.daily_parking {
+  background-color: whitesmoke;
+  height: 100vh;
+  position: relative;
+}
+
+ion-card {
+  position: absolute;
+  height: 85%;
+  width: 92%;
+  overflow-y: auto;
+}
+
+.pay_button {
+  position: absolute;
+  bottom: 10px;
+  width: 90%;
+}
+
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+.next-button {
+  float: right;
+  bottom: 15px;
+  right: 15px;
+}
+
+.prev-button {
+  position: left;
+  bottom: 15px;
+  left: 15px;
+}

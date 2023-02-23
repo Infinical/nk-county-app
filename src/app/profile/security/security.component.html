@@ -1,0 +1,83 @@
+<ion-content class="ion-padding" *ngIf="!loading">
+  <div class="ion-padding-bottom" style="margin-top: 5vh" (click)="back()">
+    <mat-icon matSuffix>arrow_back_ios</mat-icon>
+  </div>
+  <div class="ion-margin-bottom">
+    <h1>Change your password.</h1>
+  </div>
+
+  <div class="ion-padding-top ion-margin-top" style="margin-bottom: 15vh">
+    <form
+      action=""
+      [formGroup]="changePasswordForm"
+      (submit)="changePasswordForm.valid && onChangePassword()"
+    >
+      <!-- First Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Old Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="oldPassword"
+          placeholder="*********"
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <!-- Last Name -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>New Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="newPassword"
+          placeholder="*********"
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <!-- ID Number -->
+      <mat-form-field
+        appearance="outline"
+        style="width: 100%"
+        floatLabel="always"
+      >
+        <mat-label>Confirm New Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirmNewPassword"
+          placeholder="********"
+        />
+        <mat-icon matSuffix>password</mat-icon>
+      </mat-form-field>
+
+      <div class="bottom">
+        <ion-button
+          type="submit"
+          [disabled]="changePasswordForm.invalid"
+          fill="solid"
+          expand="block"
+        >
+          Submit </ion-button
+        ><br />
+      </div>
+    </form>
+  </div>
+</ion-content>
+
+<ion-content *ngIf="loading">
+  <ion-row class="ion-justify-content-center">
+    <ion-item lines="none">
+      <mat-spinner style="margin-top: 40vh"></mat-spinner>
+    </ion-item>
+  </ion-row>
+</ion-content>
